@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 const express = require('express')
 const cors = require('cors')
 const app = express();
@@ -26,6 +27,13 @@ async function run() {
             const cursor = booksCollection.find({});
             const result = await cursor.toArray();
             res.json(result)
+        })
+
+        // the match book with the id fro n client here 
+        app.get('/book/:id', async (req, res) => {
+            const query = { _id: (req.params.id) }
+            const result = await booksCollection.findOne(query);
+            res.json(result);
         })
 
     }
