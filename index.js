@@ -36,6 +36,12 @@ async function run() {
             res.json(result);
         })
 
+        // books post api here 
+        app.post('/books', async (req, res) => {
+            const cursor = await booksCollection.insertOne(req.body);
+            res.json(cursor)
+        })
+
     }
     finally {
         // await client.close();
