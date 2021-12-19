@@ -21,6 +21,7 @@ async function run() {
         await client.connect();
         const booksReactNative = client.db('books-react-native');
         const booksCollection = booksReactNative.collection('books');
+        const ordersCollection = booksReactNative.collection('orders');
 
         // all the books get api here 
         app.get('/books', async (req, res) => {
@@ -38,6 +39,12 @@ async function run() {
 
         // books post api here 
         app.post('/books', async (req, res) => {
+            const cursor = await booksCollection.insertOne(req.body);
+            res.json(cursor)
+        })
+
+        // orders post api here 
+        app.post('/orders', async (req, res) => {
             const cursor = await booksCollection.insertOne(req.body);
             res.json(cursor)
         })
