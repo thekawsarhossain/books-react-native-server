@@ -31,7 +31,7 @@ async function run() {
 
         // the match book with the id fro n client here 
         app.get('/book/:id', async (req, res) => {
-            const query = { _id: (req.params.id) }
+            const query = { _id: ObjectId(req.params.id) }
             const result = await booksCollection.findOne(query);
             res.json(result);
         })
