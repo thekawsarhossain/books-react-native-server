@@ -22,6 +22,7 @@ async function run() {
         const booksReactNative = client.db('books-react-native');
         const booksCollection = booksReactNative.collection('books');
         const ordersCollection = booksReactNative.collection('orders');
+        const freeBooks = booksReactNative.collection('freeBooks');
 
         // all the books get api here 
         app.get('/books', async (req, res) => {
@@ -62,6 +63,12 @@ async function run() {
             res.json(result);
         })
 
+        // free book get api here 
+        app.get('/poems', async (req, res) => {
+            const cursor = freeBooks.find({});
+            const result = await cursor.toArray();
+            res.json(result)
+        })
     }
     finally {
         // await client.close();
